@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BlogProject.Entities.Abstract;
+using BlogProject.Shared.Entities.Abstract;
 namespace BlogProject.Entities.Concrete
 {
 

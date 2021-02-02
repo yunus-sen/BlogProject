@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlogProject.Entities.Abstract
+namespace BlogProject.Shared.Entities.Abstract
 {
     public abstract class EntityBase
     {
