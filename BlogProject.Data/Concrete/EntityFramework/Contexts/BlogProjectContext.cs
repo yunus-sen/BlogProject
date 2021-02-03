@@ -1,4 +1,5 @@
-﻿using BlogProject.Entities.Concrete;
+﻿using BlogProject.Data.Concrete.EntityFramework.Mappings;
+using BlogProject.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,16 @@ namespace BlogProject.Data.Concrete.EntityFramework.Contexts
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-120TBH7;Database=BlogProject;Trusted_Connection=True;Connect Timeout=30;MultipleActiveResultSets=True;");
+        }
+
+        // yukarı mettotta mapping yapmak yerine IEntityTypeCofiguration interface yardımıyla yaptım ve ekledim.
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new ArticleMap());
+            modelBuilder.ApplyConfiguration(new CategoryMap());
+            modelBuilder.ApplyConfiguration(new CommentMap());
+            modelBuilder.ApplyConfiguration(new RoleMap());
+            modelBuilder.ApplyConfiguration(new UserMap());
         }
 
 

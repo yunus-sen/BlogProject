@@ -29,6 +29,22 @@ namespace BlogProject.Data.Concrete.EntityFramework.Mappings
             builder.Property(r => r.IsDeleted).IsRequired();
             builder.Property(r => r.Note).HasMaxLength(500);
             builder.ToTable("Roles");
+
+            //initializer ile farklı intializer icinde var mı yokmu diye kkontrol etmem lazımdı fakat burda direkt tablo oluşurken ekler ve kalır.
+
+            builder.HasData(new Role
+            {
+                Id = 1,
+                CreatedDate = DateTime.Now,
+                CreatedByName = "InitializerCreated",
+                Description = "Admin Rolü ve Tüm işlemlerde yetkilidir.",
+                IsActive = true,
+                IsDeleted = false,
+                ModifiedByName = "InitialCreated.",
+                ModifiedDate = DateTime.Now,
+                Name="Admin",
+                Note="Admin Rolü."
+            });
         }
     }
 }

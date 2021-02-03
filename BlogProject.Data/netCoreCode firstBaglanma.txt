@@ -1,0 +1,15 @@
+context clasýmýn bulundugu katmanda Powershell ac
+
+
+“dotnet tool install --global dotnet-ef” komutu en güncel versiyonu yüklemek için yeterli olacaktýr.
+
+kurulu ise dotnet ef yaz at cýkar.
+****************************
+****************************
+Yeni bir Migration eklemek için:
+dotnet ef migrations add InitialCreate
+****************************
+****************************
+Tüm konfigürasyon ve ayarlar ile veritabanýmýzý oluþturmak için:
+dotnet ef database update
+****************************
