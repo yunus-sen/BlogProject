@@ -18,6 +18,7 @@ namespace BlogProject.Entities.Concrete
         public string SeoAuthor { get; set; }
         public string SeoDescription { get; set; }
         public string SeoTags { get; set; }
+        public string Note { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public int UserId { get; set; }
