@@ -13,7 +13,7 @@ namespace BlogProject.Data.Abstract
         ICommentRepository Comments { get; }
         IRoleRepository Roles { get; }
         IUserRepository Users { get; }
-        Task<int> CommitAsync();
+        Task<int> SaveAsync();
 
 
     }

@@ -32,7 +32,7 @@ namespace BlogProject.Shared.Data.Concrete.EntityFramework
             return await _context.Set<TEntity>().CountAsync(predicate);
         }
 
-        public async Task Delete(TEntity entity)
+        public async Task DeleteAsync(TEntity entity)
         {
             await Task.Run(() =>
             {
@@ -47,12 +47,13 @@ namespace BlogProject.Shared.Data.Concrete.EntityFramework
             {
                 query = query.Where(predicate);
             }
-
-            foreach (var includeProperty in includeProperties)
+            if (includeProperties != null)
             {
-                query = query.Include(includeProperty);
+                foreach (var includeProperty in includeProperties)
+                {
+                    query = query.Include(includeProperty);
+                }
             }
-
             return await query.ToListAsync();
         }
 
