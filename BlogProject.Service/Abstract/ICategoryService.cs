@@ -1,7 +1,7 @@
 ﻿
 using BlogProject.Entities.Concrete;
 using BlogProject.Entities.Dtos;
-using BlogProject.Entities.Entities.Dtos;
+using BlogProject.Entities.Dtos;
 using BlogProject.Shared.Utilities.Results.Abstract;
 using System;
 using System.Collections.Generic;

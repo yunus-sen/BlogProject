@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BlogProject.Entities.Concrete;
 using BlogProject.Entities.Dtos;
-using BlogProject.Entities.Entities.Dtos;
+using BlogProject.Entities.Dtos;
 
 namespace BlogProject.Service.AutoMapper.Profiles
 {

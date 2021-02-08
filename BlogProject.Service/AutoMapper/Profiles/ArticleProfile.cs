@@ -9,12 +9,13 @@ using BlogProject.Entities.Dtos;
 
 namespace BlogProject.Service.AutoMapper.Profiles
 {
-    public class ArticleProfile:Profile
+    public class ArticleProfile : Profile
     {
         public ArticleProfile()
         {
-            CreateMap<ArticleAddDto, Article>().ForMember(dest=>dest.CreatedDate,opt=>opt.MapFrom(x=>DateTime.Now));
-            CreateMap<ArticleUpdateDto, Article>().ForMember(dest=>dest.ModifiedDate,opt=>opt.MapFrom(x=>DateTime.Now));
+            CreateMap<ArticleAddDto, Article>().ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(x => DateTime.Now));
+            CreateMap<ArticleUpdateDto, Article>().ForMember(dest => dest.ModifiedDate, opt => opt.MapFrom(x => DateTime.Now));
+
         }
     }
 }
