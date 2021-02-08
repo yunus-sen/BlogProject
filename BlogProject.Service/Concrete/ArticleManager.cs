@@ -104,24 +104,35 @@ namespace BlogProject.Service.Concrete
 
         }
 
-        public async Task<IResult> Add(ArticleAddDto articleAddDto, string createdByName)
+        public async Task<IDataResult<ArticleDto>> Add(ArticleAddDto articleAddDto, string createdByName)
         {
             var article = _mapper.Map<Article>(articleAddDto);
             article.CreatedByName = createdByName;
             article.ModifiedByName = createdByName;
             article.UserId = 1;
-            await _unitOfWork.Articles.AddAsync(article);
+            var articleStore = await _unitOfWork.Articles.AddAsync(article);
             await _unitOfWork.SaveAsync();
-            return new Result(ResultStatus.Success, $"{articleAddDto.Title} başlıklı makale başarıyla eklenmiştir.");
+            return new DataResult<ArticleDto>(ResultStatus.Success, $"{articleAddDto.Title} başlıklı makale başarıyla eklenmiştir.", new ArticleDto
+            {
+                Article = articleStore,
+                Message = $"{articleAddDto.Title} başlıklı makale başarıyla eklenmiştir.",
+                ResultStatus = ResultStatus.Success
+            });
         }
 
-        public async Task<IResult> Update(ArticleUpdateDto articleUpdateDto, string modifiedByName)
+        public async Task<IDataResult<ArticleDto>> Update(ArticleUpdateDto articleUpdateDto, string modifiedByName)
         {
             var article = _mapper.Map<Article>(articleUpdateDto);
             article.ModifiedByName = modifiedByName;
-            await _unitOfWork.Articles.UpdateAsync(article);
+            var storedArticle = await _unitOfWork.Articles.UpdateAsync(article);
             await _unitOfWork.SaveAsync();
-            return new Result(ResultStatus.Success, $"{articleUpdateDto.Title} başlıklı makale başarıyla güncellenmiştir.");
+            return new DataResult<ArticleDto>(ResultStatus.Success, $"{articleUpdateDto.Title} başlıklı makale başarıyla güncellenmiştir.", new ArticleDto
+            {
+                Article = storedArticle,
+                ResultStatus = ResultStatus.Success,
+                Message = $"{articleUpdateDto.Title} başlıklı makale başarıyla güncellenmiştir."
+
+            });
         }
 
         public async Task<IResult> Delete(int articleId, string modifiedByName)
