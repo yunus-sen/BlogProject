@@ -1,4 +1,7 @@
-﻿using BlogProject.Service.Abstract;
+﻿using BlogProject.Entities.Dtos;
+using BlogProject.Mvc.Areas.Admin.Models;
+using BlogProject.Service.Abstract;
+using BlogProject.Shared.Utilities.Extentions;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,6 +23,22 @@ namespace BlogProject.Mvc.Areas.Admin.Controllers
         {
             var result = await _categoryService.GetAll();
             return View(result.Data);
+        }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return PartialView("_CategoryAddPartial");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add( CategoryAddDto categoryAddDto )
+        {
+            var categoryAjaxModel = new CategoryAddAjaxViewModel
+            {
+                CategoryAddPartial = await this.RenderViewToStringAsync("_CategoryAddPartial", categoryAddDto)
+            };
+            return PartialView("_CategoryAddPartial");
         }
     }
 }
