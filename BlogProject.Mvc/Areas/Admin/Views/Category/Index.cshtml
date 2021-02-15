@@ -13,6 +13,9 @@
             Kategoriler
         </div>
         <div class="card-body">
+            <div class="spinner-border" role="status" style="display: none;">
+                <span class="sr-only">Yükleniyor...</span>
+            </div>
             <div class="table-responsive">
                 <table class="table table-bordered" id="categoriesTable" width="100%" cellspacing="0">
                     <thead>
@@ -27,6 +30,7 @@
                             <th>Oluşturan Kullanıcı Adı</th>
                             <th>Son Düzenlenme Tarihi</th>
                             <th>Son Düzenleyen Kullanıcı Adı</th>
+                            <th>İşlemler</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -41,12 +45,13 @@
                             <th>Oluşturan Kullanıcı Adı</th>
                             <th>Son Düzenlenme Tarihi</th>
                             <th>Son Düzenleyen Kullanıcı Adı</th>
+                            <th>İşlemler</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach (var category in Model.Categories)
                         {
-                            <tr>
+                            <tr name="@category.Id">
                                 <td>@category.Id</td>
                                 <td>@category.Name</td>
                                 <td>@category.Description</td>
@@ -57,6 +62,10 @@
                                 <td>@category.CreatedByName</td>
                                 <td>@category.ModifiedDate.ToShortDateString()</td>
                                 <td>@category.ModifiedByName</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm btn-update" data-id="@category.Id"><span class="fas fa-edit"></span></button>
+                                    <button class="btn btn-danger btn-sm btn-delete" data-id="@category.Id"><span class="fas fa-minus-circle"></span></button>
+                                </td>
                             </tr>
                         }
                     </tbody>
@@ -74,75 +83,5 @@
 }
 @section Scripts
 {
-    <script>
-        $(document).ready(function() {
-            $('#categoriesTable').DataTable({
-                dom:
-                    "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-                        "<'row'<'col-sm-12'tr>>" +
-                        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-                buttons: [
-                    {
-                        text: 'Ekle',
-                        attr: {
-                            id: "btnAdd",
-                        },
-                        className: 'btn btn-success',
-                        action: function(e, dt, node, config) {
-
-                        }
-                    },
-                    {
-                        text: 'Yenile',
-                        className: 'btn btn-warning',
-                        action: function(e, dt, node, config) {
-                            alert('Yenile butonuna basıldı.');
-                        }
-                    }
-                ],
-                language: {
-                    "sDecimal": ",",
-                    "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
-                    "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
-                    "sInfoEmpty": "Kayıt yok",
-                    "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
-                    "sInfoPostFix": "",
-                    "sInfoThousands": ".",
-                    "sLengthMenu": "Sayfada _MENU_ kayıt göster",
-                    "sLoadingRecords": "Yükleniyor...",
-                    "sProcessing": "İşleniyor...",
-                    "sSearch": "Ara:",
-                    "sZeroRecords": "Eşleşen kayıt bulunamadı",
-                    "oPaginate": {
-                        "sFirst": "İlk",
-                        "sLast": "Son",
-                        "sNext": "Sonraki",
-                        "sPrevious": "Önceki"
-                    },
-                    "oAria": {
-                        "sSortAscending": ": artan sütun sıralamasını aktifleştir",
-                        "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
-                    },
-                    "select": {
-                        "rows": {
-                            "_": "%d kayıt seçildi",
-                            "0": "",
-                            "1": "1 kayıt seçildi"
-                        }
-                    }
-                }
-            });
-            @* DataTables ends here *@
-            $(function() {
-                const url = '@Url.Action("Add", "Category")';
-                const placeHolderDiv = $('#modalPlaceHolder');
-                $('#btnAdd').click(function() {
-                    $.get(url).done(function(data) {
-                        placeHolderDiv.html(data);
-                        placeHolderDiv.find(".modal").modal('show');
-                    });
-                });
-            });
-        });
-    </script>
+    <script src="~/js/categoryIndex.js" type="application/ecmascript"></script>
 }
