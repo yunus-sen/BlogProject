@@ -1,3 +1,4 @@
+using BlogProject.Mvc.AutoMapper.Profiles;
 using BlogProject.Service.AutoMapper.Profiles;
 using BlogProject.Service.Concrete.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -26,7 +27,7 @@ namespace BlogProject.Mvc
 
             });//MVC mimarisi kullanacagýmý belirttim.
             services.AddSession();
-            services.AddAutoMapper(typeof(CategoryProfile),typeof(ArticleProfile));
+            services.AddAutoMapper(typeof(CategoryProfile),typeof(ArticleProfile),typeof(UserProfile));
             services.LoadMyServices();
             services.ConfigureApplicationCookie(options =>
             {
