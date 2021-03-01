@@ -15,8 +15,6 @@ namespace BlogProject.Data.Concrete
         private readonly EfArticleRepository _articleRepository;
         private readonly EfCategoryRepository _categoryRepsoitory;
         private readonly EfCommentRepository _commentRepository;
-        private readonly EfRoleRepository _roleRepository;
-        private readonly EfUserRepository _userRepository;
 
         public UnitOfWork(BlogProjectContext context)
         {
@@ -27,10 +25,6 @@ namespace BlogProject.Data.Concrete
         public ICategoryRepository Categories => _categoryRepsoitory ?? new EfCategoryRepository(_context);
 
         public ICommentRepository Comments => _commentRepository ?? new EfCommentRepository(_context);
-
-        public IRoleRepository Roles => _roleRepository ?? new EfRoleRepository(_context);
-
-        public IUserRepository Users => _userRepository ?? new EfUserRepository(_context);
 
         public async Task<int> SaveAsync()
         {
